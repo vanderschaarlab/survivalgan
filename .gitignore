@@ -131,3 +131,4 @@ experiments/data/*
 weight_checkpoint*
 experiments/diagrams/*
 experiments/output/*
+workspace
