@@ -127,5 +127,7 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
-data
+experiments/data/*
 weight_checkpoint*
+experiments/diagrams/*
+experiments/output/*

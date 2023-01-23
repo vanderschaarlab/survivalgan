@@ -6,17 +6,20 @@ from typing import Tuple
 import numpy as np
 import pandas as pd
 from lifelines.datasets import load_rossi
-from medicaldata.CUTRACT import download as cutract_download
-from medicaldata.CUTRACT import load as cutract_load
-from medicaldata.MAGGIC import download as maggic_download
-from medicaldata.MAGGIC import load as maggic_load
-from medicaldata.NCRAS import download as ncras_download
-from medicaldata.NCRAS import load as ncras_load
-from medicaldata.SEER_prostate_cancer import download as seer_download
-from medicaldata.SEER_prostate_cancer import load as seer_load
-from pycox import datasets
 from sklearn.preprocessing import LabelEncoder
-from sksurv.datasets import load_aids, load_flchain, load_gbsg2, load_whas500
+from sksurv.datasets import load_aids
+
+try:
+    from medicaldata.CUTRACT import download as cutract_download
+    from medicaldata.CUTRACT import load as cutract_load
+    from medicaldata.MAGGIC import download as maggic_download
+    from medicaldata.MAGGIC import load as maggic_load
+    from medicaldata.NCRAS import download as ncras_download
+    from medicaldata.NCRAS import load as ncras_load
+    from medicaldata.SEER_prostate_cancer import download as seer_download
+    from medicaldata.SEER_prostate_cancer import load as seer_load
+except BaseException:
+    pass
 
 
 def get_dataset(name: str) -> Tuple[pd.DataFrame, str, str, list]:
@@ -32,33 +35,11 @@ def get_dataset(name: str) -> Tuple[pd.DataFrame, str, str, list]:
         df = X.copy()
         df["event"] = E
         df["duration"] = T
-    elif name == "support":
-        df = datasets.support.read_df()
-    elif name == "gbsg":
-        df = datasets.gbsg.read_df()
     elif name == "rossi":
         df = load_rossi()
         df = df.rename(columns={"week": "duration", "arrest": "event"})
     elif name == "aids":
         X, Y = load_aids()
-        Y_unp = np.array(Y, dtype=[("event", "int"), ("duration", "float")])
-        df = X.copy()
-        df["event"] = Y_unp["event"]
-        df["duration"] = Y_unp["duration"]
-    elif name == "flchain":
-        X, Y = load_flchain()
-        Y_unp = np.array(Y, dtype=[("event", "int"), ("duration", "float")])
-        df = X.copy()
-        df["event"] = Y_unp["event"]
-        df["duration"] = Y_unp["duration"]
-    elif name == "gbsg2":
-        X, Y = load_gbsg2()
-        Y_unp = np.array(Y, dtype=[("event", "int"), ("duration", "float")])
-        df = X.copy()
-        df["event"] = Y_unp["event"]
-        df["duration"] = Y_unp["duration"]
-    elif name == "whas500":
-        X, Y = load_whas500()
         Y_unp = np.array(Y, dtype=[("event", "int"), ("duration", "float")])
         df = X.copy()
         df["event"] = Y_unp["event"]
@@ -85,7 +66,7 @@ def get_dataset(name: str) -> Tuple[pd.DataFrame, str, str, list]:
         df = X.copy()
         df["event"] = Y
         df["duration"] = T
-    elif name == "maggic":
+    elif name == "maggic" or name == "pheart":
         file_id = "19Zvlxid9apEfI6dxuIrygOJCpckQVnX3"
 
         csv_path = data_folder / "maggic.csv"
