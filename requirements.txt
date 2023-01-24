@@ -1,0 +1,3 @@
+synthcity[testing]
+autoprognosis
+scikit-survival
