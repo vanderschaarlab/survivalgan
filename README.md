@@ -42,4 +42,15 @@ Add the data in the `experiments/data` folder.
 | Figure 6,7        | [plots_02_benchmark_gain_of_function](experiments/plots_02_benchmark_gain_of_function.ipynb)                           |
 
 ## Citing
-```TODO```
+```
+@misc{https://doi.org/10.48550/arxiv.2302.12749,
+  doi = {10.48550/ARXIV.2302.12749},
+  url = {https://arxiv.org/abs/2302.12749},
+  author = {Norcliffe, Alexander and Cebere, Bogdan and Imrie, Fergus and Lio, Pietro and van der Schaar, Mihaela},
+  keywords = {Machine Learning (cs.LG), FOS: Computer and information sciences, FOS: Computer and information sciences},
+  title = {SurvivalGAN: Generating Time-to-Event Data for Survival Analysis},  
+  year = {2023},
+  copyright = {Creative Commons Attribution 4.0 International}
+}
+
+```
